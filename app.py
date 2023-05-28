@@ -1,3 +1,4 @@
+"""IMPORT REQUIRED PACKAGES"""
 import os
 import streamlit as st
 from PIL import Image
@@ -11,6 +12,7 @@ if not os.path.exists(upload_dir):
     os.makedirs(upload_dir)
 
 def save_uploaded_file(uploaded_file):
+    """Save the uploaded files in /tmp/uploads"""
     unique_filename = str(uuid.uuid4())
     file_ext = os.path.splitext(uploaded_file.name)[-1]
     saved_filename = unique_filename + file_ext
@@ -19,16 +21,19 @@ def save_uploaded_file(uploaded_file):
     return saved_filename
 
 def extract_text_from_image(image_path):
+    """Extracting the text data from uploaded image"""
     image = Image.open(image_path)
     text = pytesseract.image_to_string(image)
     return text
 
 def analyze_sentiment(text):
+    """Analyzing the sentiment of extracted text"""
     blob = TextBlob(text)
     sentiment = blob.sentiment.polarity
     return sentiment
 
 def main():
+    """Main function"""
     st.title("OpenShift Hosted Text Extraction Web App By Mr.R.B.Awankar")
 
     # Upload image
